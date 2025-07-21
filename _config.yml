@@ -1,16 +1,16 @@
 # Configurations
-title:            Jekyll Gitbook
-longtitle:        Jekyll Gitbook
-author:           HE Tao
-email:            sighingnow@gmail.com
+title:            잔디를 심자
+longtitle:        꾸준히 잔디를 심자
+author:           길지운
+email:            lak2577@naver.com
 description: >
-  Build Jekyll site with the GitBook style.
+  TIL 등 다양한 방식으로 잔디를 심자
 
 version:          1.0
 gitbook_version:  3.2.3
 
-url:              'https://sighingnow.github.io'
-baseurl:          '/jekyll-gitbook'
+url:              'https://planting-grass.github.io'
+baseurl:          ''
 rss:              RSS
 
 # bootstrap: use the remote theme for the site itself
@@ -50,6 +50,9 @@ exclude:
   - _drafts
 
 collections:
+  til:
+    output: true
+    permalink: /:collection/:path/
   pages:
     output: true
     permalink: /:collection/:path/
@@ -58,6 +61,7 @@ collections:
     permalink: /:collection/:path/
 
 ordered_collections:
+  - til
   - posts
   - pages
   - others
