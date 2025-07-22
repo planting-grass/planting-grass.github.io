@@ -50,9 +50,6 @@ exclude:
   - _drafts
 
 collections:
-  til:
-    output: true
-    permalink: /:collection/:path/
   pages:
     output: true
     permalink: /:collection/:path/
@@ -61,7 +58,6 @@ collections:
     permalink: /:collection/:path/
 
 ordered_collections:
-  - til
   - posts
   - pages
   - others
