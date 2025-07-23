@@ -1,10 +1,10 @@
 # Configurations
-title:            잔디를 심자
+title:            TIL 잔디 심기
 longtitle:        꾸준히 잔디를 심자
 author:           길지운
 email:            lak2577@naver.com
 description: >
-  TIL 등 다양한 방식으로 잔디를 심자
+  TIL로 매일 잔디를 심자
 
 version:          1.0
 gitbook_version:  3.2.3

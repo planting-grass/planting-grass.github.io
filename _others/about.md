@@ -1,9 +1,29 @@
 ---
-title: About
+title: TIL 작성법
 author: 길지운
-date: 2025-07-21
-category: Jekyll
+date: 2025-07-23
 layout: post
 ---
 
-This is an about page for "others" in the collections.
+
+1. _posts/til/{본인 이름}/{연도}/{월} 디렉토리 안에 TIL 작성
+    1. 파일명은 "{연도}-{월}-{일}-{제목}.md" 형식 반드시 준수 (준수하지 않으면 블로그에 표시 안됨)
+    2. 월, 일이 한자리수인 경우 앞에 0 채우기 (예. 2025년 5월 5일 → 2025-05-05-제목.md)
+    3. 간단한 제목 작성
+
+2. TIL 작성 시 항상 아래 내용 작성
+    ```
+    ---
+    title: 2025-07-23 (날짜)
+    author: 홍길동 (이름)
+    date: 2025-07-23 (날짜)
+    category: TIL/홍길동/2025/07 (파일 경로 : TIL/{이름}/{연}/{월})
+    layout: post (자유)
+    ---
+    ```
+
+3. 미래 날짜 작성 시 블로그에 표시 X
+
+4. _pages/til/{본인 이름}/index.md 파일에서 본인 초기 페이지 수정 가능
+
+5. TIL 템플릿, 블로그 꾸미기는 자유입니다!! (많은 꾸밈이 필요한 상태 ㅠㅠ)
