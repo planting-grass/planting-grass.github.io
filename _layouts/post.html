@@ -4,14 +4,24 @@
 
         {%- include head.html -%}
 
-        {% if page.previous %}
-            <link rel="prev" href="{{site.baseurl}}{{page.previous.url}}" />
+        {%- assign user_posts = site.posts | where: "author", page.author | sort: "date" -%}
+        {%- assign current_index = nil -%}
+        {%- for post in user_posts -%}
+            {%- if post.url == page.url -%}
+                {%- assign current_index = forloop.index0 -%}
+            {%- endif -%}
+        {%- endfor -%}
+        {%- assign prev_index = current_index | minus: 1 -%}
+        {%- assign next_index = current_index | plus: 1 -%}
+
+        {% if prev_index >= 0 %}
+            <link rel="prev" href="{{site.baseurl}}{{ user_posts[prev_index].url }}" />
         {% else %}
             <link rel="prev" href="{{site.baseurl}}/" />
         {% endif %}
 
-        {% if page.next %}
-            <link rel="next" href="{{site.baseurl}}{{page.next.url}}" />
+        {% if next_index < user_posts.size %}
+            <link rel="next" href="{{site.baseurl}}{{ user_posts[next_index].url }}" />
         {% endif %}
     </head>
     <body>
@@ -35,8 +45,8 @@
                 <div class="body-inner">
                     {%- include body.html -%}
 
-                    {% if page.previous %}
-                        <a href="{{site.baseurl}}{{page.previous.url}}" class="navigation navigation-prev navigation-unique" aria-label="Previous page: {{page.previous.title}}">
+                    {% if prev_index >= 0 %}
+                        <a href="{{site.baseurl}}{{ user_posts[prev_index].url }}" class="navigation navigation-prev navigation-unique" aria-label="Previous page: {{ user_posts[prev_index].title }}">
                             <i class="fa fa-angle-left"></i>
                         </a>
                     {% else %}
@@ -45,8 +55,8 @@
                         </a>
                     {% endif %}
 
-                    {% if page.next %}
-                        <a href="{{site.baseurl}}{{page.next.url}}" class="navigation navigation-next navigation-unique" aria-label="Next page: {{page.next.title}}">
+                    {% if next_index < user_posts.size %}
+                        <a href="{{site.baseurl}}{{ user_posts[next_index].url }}" class="navigation navigation-next navigation-unique" aria-label="Next page: {{ user_posts[next_index].title }}">
                             <i class="fa fa-angle-right"></i>
                         </a>
                     {% endif %}
