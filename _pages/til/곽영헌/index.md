@@ -1,7 +1,7 @@
 ---
 layout: post
-title: "example"
-permalink: /til/example/
+title: "곽영헌"
+permalink: /til/곽영헌/
 ---
 
 <style>
@@ -86,7 +86,7 @@ permalink: /til/example/
 
 <div class="grass-title">🌱 잔디 달력 🌱</div>
 
-{% assign posts = site.posts | where_exp: "post", "post.path contains '_posts/til/example'" %} 
+{% assign posts = site.posts | where_exp: "post", "post.path contains '_posts/til/곽영헌'" %} 
 {% assign grouped = posts | group_by_exp: "post", "post.date | date: '%Y'" %}
 
 {% for year in grouped %}
