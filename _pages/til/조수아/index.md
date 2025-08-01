@@ -98,16 +98,29 @@ permalink: /til/조수아/
 <div class="grass-month">{{ month_num }}월</div>
 {% assign days = month.items | group_by_exp: "post", "post.date | date: '%d'" %}
 
-{% comment %}
-해당 월의 첫 날짜와 마지막 날짜를 동적으로 계산
-{% endcomment %}
+{% comment %} 해당 월의 첫 날짜와 마지막 날짜를 동적으로 계산 {% endcomment %}
 {% assign first_post = month.items | first %}
-{% assign year_num = first_post.date | date: "%Y" %}
-{% assign month_str = first_post.date | date: "%m" %}
-{% assign first_day_str = year_num | append: '-' | append: month_str | append: '-01' %}
+{% assign year_num = first_post.date | date: "%Y" | plus: 0 %}
+{% assign month_num_str = month.name %}
+{% assign first_day_str = year_num | append: '-' | append: month_num_str | append: '-01' %}
 {% assign first_day = first_day_str | date: "%w" | plus: 0 %}
-{% assign next_month_str = year_num | append: '-' | append: month_str | append: '-01' | date: "%s" | plus: 2678400 | date: "%Y-%m-01" %}
-{% assign last_day = next_month_str | date: "%s" | minus: 86400 | date: "%d" | plus: 0 %}
+
+{% comment %} 각 월의 날짜 수를 수동으로 설정 (윤년 고려) {% endcomment %}
+{% if month_num == 1 or month_num == 3 or month_num == 5 or month_num == 7 or month_num == 8 or month_num == 10 or month_num == 12 %}
+  {% assign last_day = 31 %}
+{% elsif month_num == 2 %}
+  {% if year_num | modulo: 400 == 0 %}
+    {% assign last_day = 29 %}
+  {% elsif year_num | modulo: 100 == 0 %}
+    {% assign last_day = 28 %}
+  {% elsif year_num | modulo: 4 == 0 %}
+    {% assign last_day = 29 %}
+  {% else %}
+    {% assign last_day = 28 %}
+  {% endif %}
+{% else %}
+  {% assign last_day = 30 %}
+{% endif %}
 
 <table class="grass-calendar">
   <thead>
@@ -138,25 +151,31 @@ permalink: /til/조수아/
             <td></td>
           {% else %}
             {% assign day_str = day | prepend: '0' | slice: -2, 2 %}
-            {% assign day_posts = days | where: "name", day_str %}
+            
+            {% assign day_group = nil %}
+            {% for group in days %}
+              {% if group.name == day_str %}
+                {% assign day_group = group %}
+                {% break %}
+              {% endif %}
+            {% endfor %}
+
             {% assign cell_class = "" %}
             {% if col == 0 %}
               {% assign cell_class = cell_class | append: "sun" %}
             {% elsif col == 6 %}
               {% assign cell_class = cell_class | append: "sat" %}
             {% endif %}
-            {% if day_posts.size > 0 %}
+
+            {% if day_group and day_group.items.size > 0 %}
               {% assign cell_class = cell_class | append: " grass" %}
               <td class="{{ cell_class | strip }}">
-                {% for group in day_posts %}
-                  {% for post in group.items %}
-                    <a href="{{ post.url }}"><span class="grass-dot">{{ day }}</span></a>
-                  {% endfor %}
-                {% endfor %}
+                <a href="{{ day_group.items[0].url }}"><span class="grass-dot">{{ day }}</span></a>
               </td>
             {% else %}
               <td class="{{ cell_class | strip }}">{{ day }}</td>
             {% endif %}
+            
             {% assign day = day | plus: 1 %}
           {% endif %}
         {% endfor %}
