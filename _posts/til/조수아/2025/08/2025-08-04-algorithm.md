@@ -7,16 +7,18 @@ layout: post
 ---
 
 # 오늘 배운 것
+
 ## 알고리즘 문제
+
 ### 🔗 [BJ_20055_컨테이어벨트위의로봇](https://www.acmicpc.net/problem/20055)
 
 처음에는 배열 자체를 돌릴려는 어리석은 생각을 했지만 인덱스를 돌려서 충분히 할 수 있었다..! 로직 상 내리는 위치 부터 먼저 체킹하고 벨트를 돌린 후에 다시 내리는 위치를 체킹하면 됐는데 이번에도 너무 섣불리 구현에 돌입만 한 것이 아닌지 싶다. 삼성 기출 문제라고 해서 풀었는데, 조금 구현이나 시뮬레이션 적이 부분이 많다는 것을 느껴서 무조건 알고리즘으로 풀 수 있을거야 라고 겁먹기보다는 구현을 어떻게 할지 고민해보는 것도 중요한 것 같다.
 
-## 🔗 [D3_9299_한빈이와SpotMart](https://swexpertacademy.com/main/talk/solvingClub/problemView.do?solveclubId=AZgOVs9qcebHBISV&contestProbId=AW8Wj7cqbY0DFAXN&probBoxId=AZhyrab6StbHBIT9+&type=PROBLEM&problemBoxTitle=250804&problemBoxCnt=++2+)
+### 🔗 [D3_9299_한빈이와SpotMart](https://swexpertacademy.com/main/talk/solvingClub/problemView.do?solveclubId=AZgOVs9qcebHBISV&contestProbId=AW8Wj7cqbY0DFAXN&probBoxId=AZhyrab6StbHBIT9+&type=PROBLEM&problemBoxTitle=250804&problemBoxCnt=++2+)
 
 투포인터를 활용하여 문제를 풀었고 특별히 어렵지 않았다. while 문으로 left가 right를 초과하기 전까지 검사하면서 가장 최댓값을 출력하도록 구현했다.
 
-## 🔗 [D4_1233_사칙연산유효성검사](https://swexpertacademy.com/main/talk/solvingClub/problemView.do?solveclubId=AZgOVs9qcebHBISV&contestProbId=AV141176AIwCFAYD&probBoxId=AZhyrab6StbHBIT9+&type=PROBLEM&problemBoxTitle=250804&problemBoxCnt=++2+)
+### 🔗 [D4_1233_사칙연산유효성검사](https://swexpertacademy.com/main/talk/solvingClub/problemView.do?solveclubId=AZgOVs9qcebHBISV&contestProbId=AV141176AIwCFAYD&probBoxId=AZhyrab6StbHBIT9+&type=PROBLEM&problemBoxTitle=250804&problemBoxCnt=++2+)
 
 단순 조건으로 풀었다. 노드의 값이 연산자면 자식 노드가 2개 존재해야하고 노드의 값이 숫자면 자식 노드가 없는 리프노드 인지 체크하고 한번이라도 틀린 경우가 생기면 flag를 설정했다.
 
