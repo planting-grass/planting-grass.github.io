@@ -10,16 +10,16 @@ layout: post
 
 ## 알고리즘
 
-### 🔗 [D3_6808_규영이와인영이의카드게임](https://swexpertacademy.com/main/code/problem/problemDetail.do?contestProbId=AV14ABYKADACFAYh)
+### 🔗 [D3_6808_규영이와인영이의카드게임](https://swexpertacademy.com/main/code/problem/problemDetail.do?contestProbId=AWgv9va6HnkDFAW0)
 perm을 구현해서 순열의 조합들을 리스트로 저장하고 해당 리스트를 모두 탐색해서 이긴 횟수를 구했다. 9! 정도의 시간 복잡도가 나왔는데 이정도는 괜찮은가 보다.. 뭔가 파이썬으로는 그냥 라이브러리 쓰던걸 구현하여 사용하니 조합이나 중복 조합도 얼른 익숙해져야 겠다고 생각했다.
 
 ### 🔗 [D4_1210_Ladder1](https://swexpertacademy.com/main/code/problem/problemDetail.do?contestProbId=AV14ABYKADACFAYh)
 dfs로 풀었고 현재 위치에서 양 옆에 1 이상의 값이 있으면 움직이도록 구현했다. flag를 두어서 왔던길로 다시 가지 않도록 하고 마지막 값이 2면 해당 출발점을 출력하도로 구현했다.
 
-### 🔗 [BJ_5567_결혼식](https://swexpertacademy.com/main/code/problem/problemDetail.do?contestProbId=AV14ABYKADACFAYh)
+### 🔗 [BJ_5567_결혼식](https://www.acmicpc.net/problem/5567)
 단순 bfs로 풀었는데 친구의 친구까지만 초대하는 조건이기에 깊이가 2일때부터는 큐에 안넣도록 했다. 실버 2라 특별히 어렵진 않았다.
 
-### 🔗 [BJ_1325_효율적인해킹](https://swexpertacademy.com/main/code/problem/problemDetail.do?contestProbId=AV14ABYKADACFAYh)
+### 🔗 [BJ_1325_효율적인해킹](https://www.acmicpc.net/problem/1325)
 하 시간초과가 엄청 났다 처음에 bfs로 풀고 이정도면 뭐 실버 1이니까 하고 넘어갔는데 바로 시간초과 처음에는 각 컴퓨터를 돌면서 해당 컴퓨터의 자식을 타고타고 가도록 구현했다. 근데 시간초과가 나서 메모이제이션이 중요하다고 생각하고 메모이제이션을 적용했지만 또 시간초과. 그래서 이문제는 다른 사람들 사례를 찾아봤는데 가장 이해가 잘되었던 사례는 최대 해킹 가능한 컴퓨터를 찾는것이 아닌 가장 신뢰를 많이 받는 컴퓨터를 찾는 방식으로 구현해야 했다는 것.. 생각의 전환이 필요하다는 생각을 했다.. 사실 이구조는 트리였고 자식의 수가 가장 많은 컴퓨터를 구하는 것이 관건이었다. 심지어 dfs와 메모이제이션으로 구했다. 좀 막힌다 싶으면 역발상을 해야겠다고 생각했다.
 
 ### 크루스칼 알고리즘
