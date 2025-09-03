@@ -1,7 +1,7 @@
 ---
-title: 2025-09-01
+title: 2025-09-02
 author: 조수아
-date: 2025-09-01
+date: 2025-09-02
 category: TIL/조수아/2025/09
 layout: post
 ---
