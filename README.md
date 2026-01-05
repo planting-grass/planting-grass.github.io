@@ -13,4 +13,5 @@ permalink: /
 | 김소희 | <a href="https://github.com/hann2a" target="_blank"><img src="https://github.com/hann2a.png" width="40" style="border-radius:50%"></a> | [김소희 TIL](https://planting-grass.github.io/til/김소희) |
 | 김희수 | <a href="https://github.com/Heesu01" target="_blank"><img src="https://github.com/Heesu01.png" width="40" style="border-radius:50%"></a> | [김희수 TIL](https://planting-grass.github.io/til/김희수) |
 | 김희원 | <a href="https://github.com/heewon916" target="_blank"><img src="https://github.com/heewon916.png" width="40" style="border-radius:50%"></a> | [김희원 TIL](https://planting-grass.github.io/til/김희원) |
+| 윤지선 | <a href="https://github.com/js-yunn" target="_blank"><img src="https://github.com/js-yunn.png" width="40" style="border-radius:50%"></a> | [윤지선 TIL](https://planting-grass.github.io/til/윤지선) |
 | 조수아 | <a href="https://github.com/soonga00" target="_blank"><img src="https://github.com/soonga00.png" width="40" style="border-radius:50%"></a> | [조수아 TIL](https://planting-grass.github.io/til/조수아) |
