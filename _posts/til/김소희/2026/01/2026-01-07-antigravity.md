@@ -1,10 +1,10 @@
- ---
- title: 2026-01-07
- author: 김소희
- date: 2026-01-07
- category: TIL/김소희/2026/01 
- layout: post
- ---
+---
+title: 2026-01-07
+author: 김소희
+date: 2026-01-07
+category: TIL/김소희/2026/01 
+layout: post
+---
 
 # TIL | 바이브 코딩으로 Jekyll 사이트 배포를 진행했다
 
