@@ -7,22 +7,20 @@ permalink: /til/김희원/
 <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=VT323&family=Noto+Sans+KR:wght@400;700&display=swap" rel="stylesheet">
 
 <style>
-/* --- Y2K & Modern Variables --- */
+/* --- 스타일 시작 --- */
 :root {
   --bg-color: #f0f2f5;
-  --grid-color: #e0e0e0;
+  --grid-color: #cfd8dc;
   --card-bg: #ffffff;
-  --main-green: #00ff41; /* 해커 느낌의 네온 그린 */
-  --deep-green: #008f11;
-  --text-primary: #333;
-  --text-secondary: #666;
-  --sat-color: #3b82f6;
-  --sun-color: #ef4444;
-  --border-style: 2px solid #000;
+  --main-green: #00ff41; /* 해커 네온 그린 */
+  --text-secondary: #555;
+  --sat-color: #2563eb;
+  --sun-color: #dc2626;
+  --border-retro: 2px solid #000;
   --shadow-retro: 4px 4px 0px #000;
 }
 
-/* 전체 컨테이너 배경 (모눈종이 패턴) */
+/* 전체 컨테이너: 모눈종이 배경 */
 .til-container {
   font-family: 'Noto Sans KR', sans-serif;
   background-color: var(--bg-color);
@@ -30,108 +28,112 @@ permalink: /til/김희원/
     linear-gradient(var(--grid-color) 1px, transparent 1px),
     linear-gradient(90deg, var(--grid-color) 1px, transparent 1px);
   background-size: 20px 20px;
-  padding: 2rem;
-  border-radius: 12px;
+  padding: 20px;
+  border-radius: 8px;
+  border: 1px solid #ddd;
 }
 
-/* 타이틀 스타일 (픽셀 폰트 + 글리치 느낌) */
+/* 헤더 영역 */
 .grass-header {
   text-align: center;
-  margin-bottom: 2rem;
+  margin-bottom: 30px;
+  padding: 20px 0;
 }
 
 .grass-title {
-  font-family: 'Press Start 2P', cursive; /* 픽셀 폰트 */
-  font-size: 1.5rem;
+  font-family: 'Press Start 2P', cursive;
+  font-size: 1.8em;
   color: #000;
   text-transform: uppercase;
-  margin-bottom: 0.5rem;
-  text-shadow: 2px 2px 0px var(--main-green);
-  letter-spacing: -1px;
+  margin: 0;
+  text-shadow: 3px 3px 0px var(--main-green);
+  line-height: 1.4;
 }
 
 .grass-subtitle {
   font-family: 'VT323', monospace;
-  font-size: 1.2rem;
-  color: var(--text-secondary);
+  font-size: 1.4em;
   background: #000;
-  color: #fff;
+  color: var(--main-green);
   display: inline-block;
-  padding: 0.2rem 0.8rem;
+  padding: 4px 12px;
+  margin-top: 10px;
   border-radius: 4px;
 }
 
-/* 연도/월 구분선 */
+/* 연도 구분선 */
 .year-divider {
   font-family: 'Press Start 2P', cursive;
-  font-size: 1.2rem;
-  border-bottom: 4px solid #000;
-  margin: 3rem 0 1rem 0;
+  font-size: 1.2em;
+  border-bottom: 3px solid #000;
+  margin: 40px 0 20px 0;
   padding-bottom: 10px;
   color: #000;
 }
 
+/* 월 뱃지 */
 .month-badge {
   display: inline-block;
   font-family: 'VT323', monospace;
-  font-size: 1.5rem;
+  font-size: 1.6em;
   font-weight: bold;
   background: var(--main-green);
   color: #000;
-  padding: 2px 12px;
+  padding: 2px 10px;
   border: 2px solid #000;
-  box-shadow: 2px 2px 0 #000;
-  margin: 1.5rem 0 1rem 0;
-  transform: rotate(-2deg); /* 살짝 삐딱하게 */
+  box-shadow: 3px 3px 0 #000;
+  margin: 20px 0 10px 0;
+  transform: rotate(-1deg);
 }
 
-/* 달력 테이블 스타일 */
+/* 달력 테이블 */
 .grass-calendar-wrapper {
   background: var(--card-bg);
-  border: var(--border-style);
+  border: var(--border-retro);
   box-shadow: var(--shadow-retro);
-  padding: 1rem;
-  margin-bottom: 2rem;
-  overflow-x: auto; /* 모바일 대응 */
+  padding: 15px;
+  margin-bottom: 30px;
+  border-radius: 4px;
+  overflow-x: auto;
 }
 
 .grass-calendar {
   width: 100%;
-  border-collapse: separate; /* 셀 간격 분리 */
-  border-spacing: 4px; /* 셀 사이 여백 */
+  border-collapse: separate;
+  border-spacing: 4px;
   table-layout: fixed;
+  min-width: 300px;
 }
 
 .grass-calendar th {
   font-family: 'VT323', monospace;
-  font-size: 1.2rem;
+  font-size: 1.3em;
   color: var(--text-secondary);
-  padding-bottom: 10px;
-  border-bottom: 1px dashed #ccc;
+  padding-bottom: 8px;
+  border-bottom: 2px dashed #eee;
 }
 
 .grass-calendar td {
-  height: 40px;
+  height: 45px;
   text-align: center;
   vertical-align: middle;
-  background: #f4f4f4;
-  border: 1px solid #ddd;
-  border-radius: 4px; /* 살짝 둥근 사각형 (Squircles) */
-  font-size: 0.9em;
-  transition: all 0.2s;
+  background: #f8f9fa;
+  border: 1px solid #e9ecef;
+  border-radius: 6px;
+  font-size: 1em;
   position: relative;
+  transition: transform 0.1s;
 }
 
-/* 요일 색상 */
+/* 주말 색상 */
 .grass-calendar td.sat { color: var(--sat-color); background: #eff6ff; }
 .grass-calendar td.sun { color: var(--sun-color); background: #fef2f2; }
 
-/* 잔디(포스트가 있는 날) 스타일 */
+/* 잔디(포스트 있는 날) 스타일 - 핵심 */
 .grass-calendar td.grass {
-  background: #000 !important; /* 배경을 검정으로 */
-  border: 1px solid #000;
-  transform: translateY(-2px); /* 살짝 떠오르는 효과 */
-  box-shadow: 2px 2px 0px var(--main-green); /* 그림자를 형광색으로 */
+  background: #222 !important;
+  border: 2px solid #000;
+  box-shadow: 2px 2px 0px var(--main-green);
 }
 
 .grass-calendar td.grass a {
@@ -141,24 +143,20 @@ permalink: /til/김희원/
   align-items: center;
   justify-content: center;
   text-decoration: none;
-  color: var(--main-green); /* 글자색 형광 */
+  color: var(--main-green);
   font-weight: bold;
   font-family: 'VT323', monospace;
-  font-size: 1.3em;
+  font-size: 1.4em;
 }
 
 /* 잔디 호버 효과 */
 .grass-calendar td.grass:hover {
-  background: var(--main-green) !important;
-  box-shadow: 2px 2px 0px #000;
-}
-.grass-calendar td.grass:hover a {
-  color: #000;
+  transform: translate(-1px, -1px);
+  box-shadow: 4px 4px 0px var(--main-green);
 }
 
-/* 빈 날짜 숫자 스타일 */
 .day-number {
-  color: #bbb;
+  color: #ccc;
   font-family: 'VT323', monospace;
   font-size: 1.1em;
 }
@@ -166,24 +164,24 @@ permalink: /til/김희원/
 
 <div class="til-container">
   <div class="grass-header">
-    <div class="grass-title">Pixel Garden</div>
-    <div class="grass-subtitle">System.out.println("Hello, Hee-won!");</div>
+    <h1 class="grass-title">Hee-won's TIL</h1>
+    <div class="grass-subtitle">Commit: Daily_Log</div>
   </div>
 
 {% assign posts = site.posts | where_exp: "post", "post.path contains '_posts/til/김희원'" %} 
 {% assign grouped = posts | group_by_exp: "post", "post.date | date: '%Y'" %}
 
 {% for year in grouped %}
-  <div class="year-divider">📂 {{ year.name }} Archive</div>
+  <div class="year-divider">💾 {{ year.name }} Archive</div>
   
   {% assign months = year.items | group_by_exp: "post", "post.date | date: '%m'" %}
   {% for month in months %}
     {% assign month_num = month.name | plus: 0 %}
+    
     <div class="month-badge">{{ month_num }}월</div>
 
     {% assign days = month.items | group_by_exp: "post", "post.date | date: '%d'" %}
 
-    {% comment %} 날짜 계산 로직 (기존 유지) {% endcomment %}
     {% assign first_post = month.items | first %}
     {% assign year_num = first_post.date | date: "%Y" | plus: 0 %}
     {% assign month_num_str = month.name %}
