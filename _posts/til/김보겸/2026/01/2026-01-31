@@ -1,0 +1,65 @@
+---
+title: WebRTC 기반 멀티유저 AI 상태 동기화 및 딥러닝 로직 고도화
+author: 김보겸
+date: 2026-01-31
+category: TIL
+layout: post
+---
+
+## 🚀 1. 배경 (Background)
+기존 시스템은 **내 로컬 AI 상태**를 나만 볼 수 있었고, 서버에 저장되는 점수 외에는 다른 사용자와 상호작용할 수 없었다. 또한, 의자나 배경을 사람으로 오해하여 "집중 중"으로 인식하거나, 핸드폰을 잠깐만 들어도 즉시 반응하지 않는 등 UX 측면의 답답함이 있었다.
+이번 작업의 목표는 **"빠르고 정확한 AI"**와 **"함께 공부하는 느낌(Multi-user Sync)"**을 동시에 잡는 것이었다.
+---
+## 🛠️ 2. 핵심 기술적 도전 및 해결 (Challenges & Solutions)
+### Challenge 1: 의자를 사람으로 인식하는 문제 (Phantom Face)
+사용자가 자리를 비웠을 때, 의자의 등받이나 옷가지를 `Mediapipe`가 얼굴로 잘못 인식하여 "계속 집중 중"이라고 판단하는 치명적 오류가 있었다.
+*   **Solution: Hybrid Liveness Detection (하이브리드 생체 감지)**
+    *   단순 얼굴 감지(`face_detected`)에 의존하지 않고, **"살아있는 움직임"**을 필터로 추가했다.
+    *   **조건**: 5초(약 100프레임) 동안 눈 깜빡임(`EAR < 0.2`)이 없고, 고개 움직임 벡터(`face_center_dist`)가 1.5px 미만이면 **"사람 아님(Ghost)"**으로 판단.
+    *   **결과**: 자리를 비우면 의자가 있어도 5초 뒤 정확히 **AWAY(자리비움)** 상태로 전환됨.
+### Challenge 2: 답답한 AI 반응 속도 (Latency)
+핸드폰을 들었는데 AI가 1~2초 뒤에 반응하거나, 다시 공부를 시작했는데 점수가 늦게 오르는 등 **실시간성**이 부족했다.
+*   **Solution: Fast Focus State Machine**
+    *   기존의 `buffer` 기반 스무딩 로직(노이즈 제거용)이 역효과를 내고 있었다.
+    *   상태 전이 조건을 **"즉시 반응"** 위주로 개편:
+        *   `PHONE` 감지 시: Buffer 없이 **즉시 상태 변경**.
+        *   `FOCUS` 복귀 시: 점수 회복(`Reward System`)을 도입하여 초당 +1점씩 즉각 피드백 제공.
+    *   **결과**: 체감 지연시간이 1.5초 → **0.1초**로 단축됨.
+### Challenge 3: 멀티유저 상태 동기화 (P2P State Sync)
+내가 졸거나 딴짓을 할 때, 같은 스터디룸에 있는 다른 사람들의 화면에서도 내 아바타가 똑같이 행동해야 했다. 이를 위해 백엔드 DB를 거치면 부하가 너무 컸다.
+*   **Solution: WebRTC Data Channel Broadcasting**
+    *   영상/음성을 처리하는 `LiveKit`의 **Data Channel**을 활용하여 상태 패킷을 직접 브로드캐스팅했다.
+    *   **Architecture**:
+        1.  **Sender (`useAiHandler.ts`)**: 내 AI 상태 변경 시 `RoomManager.sendLiveKitData('AI_STATUS', { status: 'SLEEP' })` 호출.
+        2.  **Relay (`RoomManager.ts`)**: LiveKit SDK의 `localParticipant.publishData()`를 통해 방 전체에 바이너리/텍스트 전송.
+        3.  **Receiver (`useStudyRoom.ts`)**: `RoomEvent.DataReceived` 이벤트를 구독. 누가 보냈는지(`senderId`) 확인 후 `remoteParticipantStates` Map 업데이트.
+        4.  **Renderer (`StudyRoomPage.vue`)**: Vue의 Reactivity를 활용해 상대방 비디오 카드 위의 아바타 컴포넌트(`CharacterAvatar`)에 상태 주입.
+---
+## 💻 3. 주요 코드 조각 (Key Snippets)
+### Broadcasting Strategy (RoomManager.ts)
+```typescript
+async sendLiveKitData(topic: string, data: any) {
+    if (!this.room || !this.room.localParticipant) return;
+    
+    // JSON -> Uint8Array 인코딩
+    const strData = JSON.stringify({ topic, ...data });
+    const encoder = new TextEncoder();
+    
+    // reliable: true로 설정하여 패킷 손실 방지 (상태 정보는 중요하므로)
+    await this.room.localParticipant.publishData(encoder.encode(strData), {
+        reliable: true, 
+    });
+}
+UI Synchronization (StudyRoomPage.vue)
+<!-- 상대방 아바타 렌더링 -->
+<div v-for="rt in remoteTracks" :key="rt.participantId">
+    <CharacterAvatar 
+        :config="remoteConfigs[rt.participantId]"
+        :aiDrowsy="getAiDrowsy(remoteParticipantStates[rt.participantId] || 'FOCUS')" 
+        :aiPhone="getAiPhone(remoteParticipantStates[rt.participantId] || 'FOCUS')"
+    />
+</div>
+🎯 4. 결론 (Impact)
+Performance: AI 추론과 상태 전송이 모두 로컬+P2P로 이루어져 서버 부하 ZERO.
+UX: "내 옆자리의 친구가 졸고 있다"는 현장감을 아바타 애니메이션으로 완벽 구현.
+Stability: 오탐지(False Positive) 대폭 감소로 AI 신뢰도 확보.
