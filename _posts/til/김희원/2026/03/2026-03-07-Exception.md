@@ -1,3 +1,11 @@
+---
+title: TIL
+author: 김희원
+date: 2026-03-07
+category: TIL/김희원/2026/02
+layout: post
+---
+
 ### 핵심
 
 - 컴파일 시점에 확인되는가?
